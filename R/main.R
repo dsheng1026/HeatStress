@@ -127,9 +127,10 @@ REV_REG_10 <- function(.data){
 
 # OUTPUT ----
 # source("R/MR1.R")
-source("Fig2_final.R")
-source("Fig3_final.R")
-source("Fig4_final.R")
-
+source("R/Fig2_final.R")
+source("R/Fig3_final.R")
+source("R/Fig4_final.R")
+source("R/revision_sensitivity.R")
+source("R/plot_isimip.R")
 # obtain hex of color
 brewer.pal(n=5,"Set2")
