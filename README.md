@@ -24,9 +24,9 @@ Download the entire R project and run `R/main.R`. The script load data and sourc
 
 ## Package output and size
 The package output includes figures and datasets (`output/*` included in this repo). 
-The size of the output figure folder is about 7MB. 
-The ProjectRDS data folder is about 170MB. 
-The data folder is about 2.1GB
+The size of the output figure folder is about 9MB. 
+The ProjectRDS data folder is about 251MB. 
+The data folder is about 666 MB.
 
 ## R Session Information
 
