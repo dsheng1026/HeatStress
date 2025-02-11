@@ -63,8 +63,8 @@ CHANGE_PCT_ALL <- function(.data, time){
 FILTER_MS <- function(.data){
   .data %>%
     filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-    mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-           delta = factor(delta, levels = c("Severe", "Mild"))) %>% 
+    mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+           delta = factor(delta, levels = c("Higher", "Lower"))) %>% 
     return()
 }
 
@@ -84,10 +84,10 @@ Crop_HadGEM2_WB_IO_2 <- readRDS("C:/Model/heat_paper/Crop_HadGEM2_WB_IO_2.rds")
 Crop_GFDL_WB_IO_1 <- readRDS("C:/Model/heat_paper/Crop_GFDL_WB_IO_1.rds")
 Crop_HadGEM2_WB_IO_1 <- readRDS("C:/Model/heat_paper/Crop_HadGEM2_WB_IO_1.rds")
 
-Crop_GFDL_WB_IO_2 %>% ungroup() %>% select(GCAM_basin_ID, year, AgProductionTechnology, AgSupplySector, index) %>% mutate(source = "GFDL_High") %>% 
-  bind_rows(Crop_GFDL_WB_IO_1 %>% ungroup() %>% select(GCAM_basin_ID, year, AgProductionTechnology, AgSupplySector, index) %>% mutate(source = "GFDL_Low")) %>% 
-  bind_rows(Crop_HadGEM2_WB_IO_2 %>% ungroup() %>% select(GCAM_basin_ID, year, AgProductionTechnology, AgSupplySector, index) %>% mutate(source = "HadGEM2_High")) %>%  
-  bind_rows(Crop_HadGEM2_WB_IO_1 %>% ungroup() %>% select(GCAM_basin_ID, year, AgProductionTechnology, AgSupplySector, index) %>% mutate(source = "HadGEM2_Low")) ->
+Crop_GFDL_WB_IO_2 %>% ungroup() %>% select(GCAM_basin_ID, year, AgProductionTechnology, AgSupplySector, index) %>% mutate(source = "GFDL_High LHR") %>% 
+  bind_rows(Crop_GFDL_WB_IO_1 %>% ungroup() %>% select(GCAM_basin_ID, year, AgProductionTechnology, AgSupplySector, index) %>% mutate(source = "GFDL_Low LHR")) %>% 
+  bind_rows(Crop_HadGEM2_WB_IO_2 %>% ungroup() %>% select(GCAM_basin_ID, year, AgProductionTechnology, AgSupplySector, index) %>% mutate(source = "HadGEM2_High LHR")) %>%  
+  bind_rows(Crop_HadGEM2_WB_IO_1 %>% ungroup() %>% select(GCAM_basin_ID, year, AgProductionTechnology, AgSupplySector, index) %>% mutate(source = "HadGEM2_Low LHR")) ->
   HS_all
 
 
@@ -99,22 +99,22 @@ LaborTech2015 %>% rename(AgProductionTechnology = technology) %>%
 
 HS_all %>% 
   filter(year == 2100,
-         source == "HadGEM2_High")%>% 
+         source == "HadGEM2_High LHR")%>% 
   left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
   na.omit() %>% 
   bind_rows(HS_all %>% 
               filter(year == 2100,
-                     source == "HadGEM2_Low")%>% 
+                     source == "HadGEM2_Low LHR")%>% 
               left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
               na.omit()) %>%
   bind_rows(HS_all %>% 
               filter(year == 2100,
-                     source == "GFDL_High")%>% 
+                     source == "GFDL_High LHR")%>% 
               left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
               na.omit()) %>% 
   bind_rows(HS_all %>% 
               filter(year == 2100,
-                     source == "GFDL_Low")%>% 
+                     source == "GFDL_Low LHR")%>% 
               left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
               na.omit()) %>% 
   group_by(GCAM_basin_ID, region, source) %>% 
@@ -127,7 +127,7 @@ HS_all %>%
 ###   W.HS.reg32 ----
 HS_all %>% 
   filter(year == 2100,
-         source == "HadGEM2_High")%>% 
+         source == "HadGEM2_High LHR")%>% 
   left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
   na.omit() %>% 
   left_join_error_no_match(Regmapping) %>% 
@@ -135,7 +135,7 @@ HS_all %>%
   summarise(mult = weighted.mean(index, labor)) %>% 
   bind_rows(HS_all %>% 
               filter(year == 2100,
-                     source == "HadGEM2_Low")%>% 
+                     source == "HadGEM2_Low LHR")%>% 
               left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
               na.omit() %>% 
               left_join_error_no_match(Regmapping) %>% 
@@ -143,7 +143,7 @@ HS_all %>%
               summarise(mult = weighted.mean(index, labor))) %>% 
   bind_rows(HS_all %>% 
               filter(year == 2100,
-                     source == "GFDL_High")%>% 
+                     source == "GFDL_High LHR")%>% 
               left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
               na.omit() %>% 
               left_join_error_no_match(Regmapping) %>% 
@@ -151,7 +151,7 @@ HS_all %>%
               summarise(mult = weighted.mean(index, labor))) %>% 
   bind_rows(HS_all %>% 
               filter(year == 2100,
-                     source == "GFDL_Low")%>% 
+                     source == "GFDL_Low LHR")%>% 
               left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
               na.omit() %>% 
               left_join_error_no_match(Regmapping) %>% 
@@ -164,7 +164,7 @@ HS_all %>%
 
 HS_all %>% 
   filter(year == 2100,
-         source == "HadGEM2_High")%>% 
+         source == "HadGEM2_High LHR")%>% 
   left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
   na.omit() %>% 
   left_join_error_no_match(Regmapping) %>% 
@@ -172,7 +172,7 @@ HS_all %>%
   summarise(mult = weighted.mean(index, labor)) %>% 
   bind_rows(HS_all %>% 
               filter(year == 2100,
-                     source == "HadGEM2_Low")%>% 
+                     source == "HadGEM2_Low LHR")%>% 
               left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
               na.omit() %>% 
               left_join_error_no_match(Regmapping) %>% 
@@ -180,7 +180,7 @@ HS_all %>%
               summarise(mult = weighted.mean(index, labor))) %>% 
   bind_rows(HS_all %>% 
               filter(year == 2100,
-                     source == "GFDL_High")%>% 
+                     source == "GFDL_High LHR")%>% 
               left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
               na.omit() %>% 
               left_join_error_no_match(Regmapping) %>% 
@@ -188,7 +188,7 @@ HS_all %>%
               summarise(mult = weighted.mean(index, labor))) %>% 
   bind_rows(HS_all %>% 
               filter(year == 2100,
-                     source == "GFDL_Low")%>% 
+                     source == "GFDL_Low LHR")%>% 
               left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
               na.omit() %>% 
               left_join_error_no_match(Regmapping) %>% 
@@ -212,7 +212,7 @@ W.HS.reg10 %>%
 
 HS_all %>% 
   filter(year == 2100,
-         source == "HadGEM2_High")%>% 
+         source == "HadGEM2_High LHR")%>% 
   left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
   na.omit() %>% 
   left_join_error_no_match(Regmapping) %>% 
@@ -220,7 +220,7 @@ HS_all %>%
   summarise(mult = weighted.mean(index, labor)) %>% 
   bind_rows(HS_all %>% 
               filter(year == 2100,
-                     source == "HadGEM2_Low")%>% 
+                     source == "HadGEM2_Low LHR")%>% 
               left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
               na.omit() %>% 
               left_join_error_no_match(Regmapping) %>% 
@@ -228,7 +228,7 @@ HS_all %>%
               summarise(mult = weighted.mean(index, labor))) %>% 
   bind_rows(HS_all %>% 
               filter(year == 2100,
-                     source == "GFDL_High")%>% 
+                     source == "GFDL_High LHR")%>% 
               left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
               na.omit() %>% 
               left_join_error_no_match(Regmapping) %>% 
@@ -236,7 +236,7 @@ HS_all %>%
               summarise(mult = weighted.mean(index, labor))) %>% 
   bind_rows(HS_all %>% 
               filter(year == 2100,
-                     source == "GFDL_Low")%>% 
+                     source == "GFDL_Low LHR")%>% 
               left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
               na.omit() %>% 
               left_join_error_no_match(Regmapping) %>% 
@@ -248,7 +248,7 @@ HS_all %>%
 
 HS_all %>% 
   filter(year == 2100,
-         source == "HadGEM2_High")%>% 
+         source == "HadGEM2_High LHR")%>% 
   left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
   na.omit() %>% 
   left_join_error_no_match(Regmapping) %>% 
@@ -256,7 +256,7 @@ HS_all %>%
   summarise(mult = weighted.mean(index, labor)) %>% 
   bind_rows(HS_all %>% 
               filter(year == 2100,
-                     source == "HadGEM2_Low")%>% 
+                     source == "HadGEM2_Low LHR")%>% 
               left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
               na.omit() %>% 
               left_join_error_no_match(Regmapping) %>% 
@@ -264,7 +264,7 @@ HS_all %>%
               summarise(mult = weighted.mean(index, labor))) %>% 
   bind_rows(HS_all %>% 
               filter(year == 2100,
-                     source == "GFDL_High")%>% 
+                     source == "GFDL_High LHR")%>% 
               left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
               na.omit() %>% 
               left_join_error_no_match(Regmapping) %>% 
@@ -272,7 +272,7 @@ HS_all %>%
               summarise(mult = weighted.mean(index, labor))) %>% 
   bind_rows(HS_all %>% 
               filter(year == 2100,
-                     source == "GFDL_Low")%>% 
+                     source == "GFDL_Low LHR")%>% 
               left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
               na.omit() %>% 
               left_join_error_no_match(Regmapping) %>% 
@@ -286,7 +286,7 @@ HS_all %>%
 ##   W.HS.reg.sec ----
 HS_all %>% 
   filter(year == 2100,
-         source == "HadGEM2_High")%>% 
+         source == "HadGEM2_High LHR")%>% 
   left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
   na.omit() %>% 
   left_join_error_no_match(Regmapping) %>% 
@@ -294,7 +294,7 @@ HS_all %>%
   summarise(mult = weighted.mean(index, labor)) %>% 
   bind_rows(HS_all %>% 
               filter(year == 2100,
-                     source == "HadGEM2_Low")%>% 
+                     source == "HadGEM2_Low LHR")%>% 
               left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
               na.omit() %>% 
               left_join_error_no_match(Regmapping) %>% 
@@ -302,7 +302,7 @@ HS_all %>%
               summarise(mult = weighted.mean(index, labor))) %>% 
   bind_rows(HS_all %>% 
               filter(year == 2100,
-                     source == "GFDL_High")%>% 
+                     source == "GFDL_High LHR")%>% 
               left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
               na.omit() %>% 
               left_join_error_no_match(Regmapping) %>% 
@@ -310,7 +310,7 @@ HS_all %>%
               summarise(mult = weighted.mean(index, labor))) %>% 
   bind_rows(HS_all %>% 
               filter(year == 2100,
-                     source == "GFDL_Low")%>% 
+                     source == "GFDL_Low LHR")%>% 
               left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
               na.omit() %>% 
               left_join_error_no_match(Regmapping) %>% 
@@ -331,9 +331,9 @@ W.HS.reg.sec %>%
 
 box.EEXO %>% 
   left_join_error_no_match(W.HS.glb %>% select(year, source, mean = EEXO)) %>% 
-  mutate(source = gsub("HadGEM2_High", "Severe:\nHadGEM2_High", source),
-         source = gsub("GFDL_Low", "Mild:\nGFDL_Low", source),
-         source = factor(source, levels = c("Severe:\nHadGEM2_High", "GFDL_High", "HadGEM2_Low", "Mild:\nGFDL_Low"))) %>% 
+  mutate(source = gsub("HadGEM2_High LHR", "Higher:\nHadGEM2_High LHR", source),
+         source = gsub("GFDL_Low LHR", "Lower:\nGFDL_Low LHR", source),
+         source = factor(source, levels = c("Higher:\nHadGEM2_High LHR", "GFDL_High LHR", "HadGEM2_Low LHR", "Lower:\nGFDL_Low LHR"))) %>% 
   ggplot(aes(x = source)) +
   geom_boxplot(aes(ymin = y10, lower = y25, middle = y50, upper = y75, ymax = y90),
                stat = "identity")  +
@@ -341,13 +341,13 @@ box.EEXO %>%
                 position = position_dodge(width=1), 
                 linetype = "dashed", 
                 linewidth = 0.8) +
-  geom_point(data = df.2A %>% mutate(source = gsub("HadGEM2_High", "Severe:\nHadGEM2_High", source),
-                                 source = gsub("GFDL_Low", "Mild:\nGFDL_Low", source),
-                                 source = factor(source, levels = c("Severe:\nHadGEM2_High", "GFDL_High", "HadGEM2_Low", "Mild:\nGFDL_Low"))),
+  geom_point(data = df.2A %>% mutate(source = gsub("HadGEM2_High LHR", "Higher:\nHadGEM2_High LHR", source),
+                                 source = gsub("GFDL_Low LHR", "Lower:\nGFDL_Low LHR", source),
+                                 source = factor(source, levels = c("Higher:\nHadGEM2_High LHR", "GFDL_High LHR", "HadGEM2_Low LHR", "Lower:\nGFDL_Low LHR"))),
              aes(size = labor, x = source, y = EEXO), position = position_dodge(width = 0.2), alpha = 0.6) +
-  geom_text(data = df.2A %>% mutate(source = gsub("HadGEM2_High", "Severe:\nHadGEM2_High", source),
-                                          source = gsub("GFDL_Low", "Mild:\nGFDL_Low", source),
-                                          source = factor(source, levels = c("Severe:\nHadGEM2_High", "GFDL_High", "HadGEM2_Low", "Mild:\nGFDL_Low"))) %>%
+  geom_text(data = df.2A %>% mutate(source = gsub("HadGEM2_High LHR", "Higher:\nHadGEM2_High LHR", source),
+                                          source = gsub("GFDL_Low LHR", "Lower:\nGFDL_Low LHR", source),
+                                          source = factor(source, levels = c("Higher:\nHadGEM2_High LHR", "GFDL_High LHR", "HadGEM2_Low LHR", "Lower:\nGFDL_Low LHR"))) %>%
               filter(REG10_main %in% c("Africa", "China+", "South Asia")),  # Subset the data for values > 250
     aes(label = REG10_main, y = EEXO),  # Label points with the 'region'
     vjust = 0.5,  # Adjust vertical position of the text
@@ -388,18 +388,18 @@ Reg_map %>%
 #   geom_sf(aes(fill = REG10_main))
 
 WB %>% 
-  left_join(W.HS.WB %>% filter(source == "HadGEM2_High") %>% 
+  left_join(W.HS.WB %>% filter(source == "HadGEM2_High LHR") %>% 
               select(glu_id = GCAM_basin_ID, reg_nm = region, EEXO),
             by = c("reg_nm", "glu_id")) %>% 
   mutate(EEXO = coalesce(EEXO, 0),
-         source = "Severe: HadGEM2-High") %>% 
+         source = "Higher: HadGEM2-High LHR") %>% 
   bind_rows(WB %>% 
-              left_join(W.HS.WB %>% filter(source == "GFDL_Low") %>% 
+              left_join(W.HS.WB %>% filter(source == "GFDL_Low LHR") %>% 
                           select(glu_id = GCAM_basin_ID, reg_nm = region, EEXO),
                         by = c("reg_nm", "glu_id")) %>% 
               mutate(EEXO = coalesce(EEXO, 0),
-                     source = "Mild: GFDL-Low")) %>% 
-  mutate(source = factor(source, levels = c("Severe: HadGEM2-High", "Mild: GFDL-Low"))) ->
+                     source = "Lower: GFDL-Low LHR")) %>% 
+  mutate(source = factor(source, levels = c("Higher: HadGEM2-High LHR", "Lower: GFDL-Low LHR"))) ->
   EEXO.map.WB
 
 ggplot() +
@@ -498,22 +498,22 @@ for (t in 1:length(TIME)){
   time <- TIME[[t]]; time
   HS_all %>% 
     filter(year == time,
-           source == "HadGEM2_High")%>% 
+           source == "HadGEM2_High LHR")%>% 
     left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
     na.omit() %>% 
     bind_rows(HS_all %>% 
                 filter(year == time,
-                       source == "HadGEM2_Low")%>% 
+                       source == "HadGEM2_Low LHR")%>% 
                 left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
                 na.omit()) %>%
     bind_rows(HS_all %>% 
                 filter(year == time,
-                       source == "GFDL_High")%>% 
+                       source == "GFDL_High LHR")%>% 
                 left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
                 na.omit()) %>% 
     bind_rows(HS_all %>% 
                 filter(year == time,
-                       source == "GFDL_Low")%>% 
+                       source == "GFDL_Low LHR")%>% 
                 left_join(LaborTech2015 %>% rename(AgProductionTechnology = technology)) %>% # assign job as weight to HS index
                 na.omit()) %>% 
     group_by(source) %>% 
@@ -524,14 +524,14 @@ for (t in 1:length(TIME)){
 }
 
 do.call(rbind, EEXO_list) %>% 
-  filter(source %in% c("GFDL_Low", "HadGEM2_High")) %>% 
-  mutate(source = ifelse(source == "HadGEM2_High", "Severe", "Mild")) %>% 
+  filter(source %in% c("GFDL_Low LHR", "HadGEM2_High LHR")) %>% 
+  mutate(source = ifelse(source == "HadGEM2_High LHR", "Higher", "Lower")) %>% 
   arrange(source, year) %>% 
   group_by(source) %>% 
   rename(value = EEXO) %>% 
   mutate(index = value - lag(value),
          year = factor(year, levels = c("2100","2080", "2060", "2040", "2015")),
-         source = factor(source, levels = c("Mild", "Severe"))) %>% 
+         source = factor(source, levels = c("Lower", "Higher"))) %>% 
   na.omit() %>% 
   ggplot() +
   geom_bar(aes(y = source, x = index, fill = year),
@@ -559,12 +559,12 @@ for (t in 1:length(TIME)){
 
 do.call(rbind, LABOR_L_list) %>% 
   filter(delta %in% c("gepic_HS1_GFDL", "gepic_HS2_HadGEM")) %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild")) %>% 
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower")) %>% 
   arrange(delta, year) %>% 
   group_by(delta) %>% 
   mutate(index = value - lag(value),
          year = factor(year, levels = c("2100","2080", "2060", "2040", "2015")),
-         delta = factor(delta, levels = c("Mild", "Severe"))) %>% 
+         delta = factor(delta, levels = c("Lower", "Higher"))) %>% 
   na.omit() %>% 
   ggplot() +
   geom_bar(aes(y = delta, x = index, fill = year),
@@ -593,12 +593,12 @@ for (t in 1:length(TIME)){
 
 do.call(rbind, LABOR_pct_list) %>% 
   filter(delta %in% c("gepic_HS1_GFDL", "gepic_HS2_HadGEM")) %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild")) %>% 
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower")) %>% 
   arrange(delta, year) %>% 
   group_by(delta) %>% 
   mutate(index = value - lag(value),
          year = factor(year, levels = c("2100","2080", "2060", "2040", "2015")),
-         delta = factor(delta, levels = c("Mild", "Severe"))) %>% 
+         delta = factor(delta, levels = c("Lower", "Higher"))) %>% 
   na.omit() %>% 
   ggplot() +
   geom_bar(aes(y = delta, x = index, fill = year),

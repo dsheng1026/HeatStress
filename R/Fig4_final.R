@@ -70,8 +70,8 @@ FILTER_MS2 <- function(.data){
     mutate(impact = ifelse(startsWith(delta, "DL_"), "Labor", "delta"),
            impact = ifelse(startsWith(delta, "DC_"), "Crop", impact),
            impact = ifelse(startsWith(delta, "DCL_"), "Crop&Labor", impact), 
-           delta = ifelse(grepl("HadGEM", delta), "Severe", "Mild"),
-           delta = factor(delta, levels = c("Severe", "Mild"))) %>% 
+           delta = ifelse(grepl("HadGEM", delta), "Higher", "Lower"),
+           delta = factor(delta, levels = c("Higher", "Lower"))) %>% 
     return()
 }
 
@@ -472,7 +472,7 @@ Reg_map %>% rename(region = reg_nm) %>%
   mutate(element = gsub("Labor", "Employment", element),
          element = factor(element, levels = c("Production", "Price", "Consumption", "Employment", "Land")),
          impact = factor(impact, levels = c("Crop", "Labor", "Crop&Labor"))) %>% 
-  filter(delta == "Severe") %>% 
+  filter(delta == "Higher") %>% 
   ggplot() +
   geom_sf(aes(fill = value)) +
   scale_fill_gradient2(low = "red", high = "blue", midpoint = 0) +
@@ -526,7 +526,7 @@ Reg_map %>% rename(region = reg_nm) %>%
   mutate(element = gsub("Labor", "Employment", element),
          element = factor(element, levels = c("Production", "Price", "Consumption", "Employment", "Land")),
          impact = factor(impact, levels = c("Crop", "Labor", "Crop&Labor"))) %>% 
-  filter(delta == "Severe") %>% 
+  filter(delta == "Higher") %>% 
   ggplot() +
   geom_sf(aes(fill = value)) +
   scale_fill_gradient2(low = "red", high = "blue", midpoint = 0) +
@@ -581,7 +581,7 @@ ggplot() +
   labs(x = "", y ="%", color = "") +
   theme_bw() + theme0 + theme1 +
   theme(legend.position = "bottom")->
-  FigS4.C.reg.mild
+  FigS4.C.reg.Lower
 
-FigS4.C.reg.mild %>% Write_png(.name = paste0("FigS4_4_key_mild"), .DIR_MODULE = DIR_MODULE, h = 6, w = 14)
+FigS4.C.reg.Lower %>% Write_png(.name = paste0("FigS4_4_key_Lower"), .DIR_MODULE = DIR_MODULE, h = 6, w = 14)
 

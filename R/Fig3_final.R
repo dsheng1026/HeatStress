@@ -52,22 +52,22 @@ AgMeatPrice %>%
 Key1.A.PRICE.glb %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild"))) ->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower"))) ->
   change.pct.PRICE.glb
 
 Key1.A.PRICE.reg32 %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")))->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")))->
   change.pct.PRICE.reg32
 
 Key1.A.PRICE.reg10 %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")))->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")))->
   change.pct.PRICE.reg10
 
 ## Production ----
@@ -123,22 +123,22 @@ PSUA %>%
 Key1.A.PRODUCTION.glb %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild"))) ->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower"))) ->
   change.pct.PRODUCTION.glb
 
 Key1.A.PRODUCTION.reg32 %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")))->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")))->
   change.pct.PRODUCTION.reg32
 
 Key1.A.PRODUCTION.reg10 %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")))->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")))->
   change.pct.PRODUCTION.reg10
 
 
@@ -147,8 +147,8 @@ Key1.A.PRODUCTION.reg10 %>%
 Key1.A.PRODUCTION.reg10 %>% 
   DELTA_L_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")))->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")))->
   delta.PRODUCTION.reg10
 
 ## Consumption ----
@@ -220,22 +220,22 @@ PSUA %>%
 Key1.A.CONSUMPTION.glb %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild"))) ->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower"))) ->
   change.pct.CONSUMPTION.glb
 
 Key1.A.CONSUMPTION.reg32 %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")))->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")))->
   change.pct.CONSUMPTION.reg32
 
 Key1.A.CONSUMPTION.reg10 %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")))->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")))->
   change.pct.CONSUMPTION.reg10
 
 ## Labor ----
@@ -287,22 +287,22 @@ PluckBind("LaborDemandSec") %>%
 Key1.A.LABOR.glb %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild"))) ->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower"))) ->
   change.pct.LABOR.glb
 
 Key1.A.LABOR.reg32 %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")))->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")))->
   change.pct.LABOR.reg32
 
 Key1.A.LABOR.reg10 %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")))->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")))->
   change.pct.LABOR.reg10
 
 
@@ -357,22 +357,22 @@ LAND %>%
 Key1.A.LAND.glb %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild"))) ->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower"))) ->
   change.pct.LAND.glb
 
 Key1.A.LAND.reg32 %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")))->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")))->
   change.pct.LAND.reg32
 
 Key1.A.LAND.reg10 %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")))->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")))->
   change.pct.LAND.reg10
 
 # Yield ----
@@ -388,8 +388,8 @@ Key1.A.LAND.glb %>%
 Key1.A.YLD.glb %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")))->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")))->
   change.pct.YLD.glb
 
 Key1.A.LAND.reg10 %>% 
@@ -403,8 +403,8 @@ Key1.A.LAND.reg10 %>%
 Key1.A.YLD.reg10 %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")))->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")))->
   change.pct.YLD.reg10
 
 Key1.A.LAND.reg32 %>% 
@@ -418,8 +418,8 @@ Key1.A.LAND.reg32 %>%
 Key1.A.YLD.reg32 %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")))->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")))->
   change.pct.YLD.reg32
 
 
@@ -436,8 +436,8 @@ Key1.A.LABOR.glb %>%
 Key1.A.ETA.glb %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")))->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")))->
   change.pct.ETA.glb
 
 Key1.A.LABOR.reg10 %>% 
@@ -451,8 +451,8 @@ Key1.A.LABOR.reg10 %>%
 Key1.A.ETA.reg10 %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")))->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")))->
   change.pct.ETA.reg10
 
 
@@ -467,8 +467,8 @@ Key1.A.LABOR.reg32 %>%
 Key1.A.ETA.reg32 %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")))->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")))->
   change.pct.ETA.reg32
 
 ##  gather all variables----
@@ -518,29 +518,29 @@ bind_rows(change.pct.PRICE.glb,
 Key1.A.LABOR.glb %>% 
   DELTA_L_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild"))) ->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower"))) ->
   d.LABOR.glb
 
 Key1.A.LABOR.reg32 %>% 
   DELTA_L_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild"))) ->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower"))) ->
   d.LABOR.reg32
 
 Key1.A.LAND.glb %>% 
   DELTA_L_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild"))) ->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower"))) ->
   d.LAND.glb
 
 Key1.A.LAND.reg32 %>% 
   DELTA_L_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild"))) ->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower"))) ->
   d.LAND.reg32
 
 
@@ -611,8 +611,8 @@ AgMeatPrice %>%
   drop_na() %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")),
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")),
          element = "Price") ->
   change.pct.PRICE.glb.sec
 
@@ -626,8 +626,8 @@ PSUA %>%
   Agg_reg(sector, element) %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")),
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")),
          element = "Production") ->
   change.pct.PRODUCTION.glb.sec
 
@@ -636,8 +636,8 @@ LAND %>% filter(sector %in% c("corn", "rice", "wheat", "soybean")) %>%
   Agg_reg(sector) %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")),
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")),
          element = "Land") ->
   change.pct.LAND.glb.sec
 
@@ -648,8 +648,8 @@ PluckBind("LaborDemandSec") %>%
   Agg_reg(sector) %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")),
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")),
          element = "Labor") ->
   change.pct.LABOR.glb.sec
 
@@ -671,8 +671,8 @@ LAND %>% filter(sector %in% c("corn", "rice", "wheat", "soybean")) %>%
   select(-Land, -Production) %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")))->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")))->
   change.pct.YLD.glb.sec
 
 
@@ -695,8 +695,8 @@ PluckBind("LaborDemandSec") %>%
   select(-Labor, -Production) %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")))->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")))->
   change.pct.ETA.glb.sec
 
 ## COMBINE ----
@@ -751,7 +751,7 @@ bind_rows(change.pct.PRICE.reg10,
           change.pct.YLD.reg10,
           change.pct.LAND.reg10) %>% 
   filter(sector %in% c("Key", "Other crops") ) %>% 
-  filter(region %in% c("Africa", "North America", "Reforming Economy" , "Southeast Asia")) %>%
+  filter(region %in% c("Africa", "North America", "Reforming Economies" , "Southeast Asia")) %>%
   mutate(element = gsub("Labor", "Employment", element),,
          element = gsub("Eta", "Labor productivity", element),
          element = gsub("Yield", "Crop yield", element),
@@ -852,15 +852,15 @@ PSUA %>%
 FPI.reg10 %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild"))) ->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower"))) ->
   change.pct.FPI.reg10
 
 FPI.glb %>% 
   CHANGE_PCT_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild"))) ->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower"))) ->
   change.pct.FPI.glb
 
 
@@ -920,22 +920,22 @@ PSUA %>%
 Key1.A.TRADE.glb %>% 
   DELTA_L_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild"))) ->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower"))) ->
   delta.TRADE.glb
 
 Key1.A.TRADE.reg32 %>% 
   DELTA_L_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")))->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")))->
   delta.TRADE.reg32
 
 Key1.A.TRADE.reg10 %>% 
   DELTA_L_ALL(2100) %>% 
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>% 
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")))->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")))->
   delta.TRADE.reg10
 
 
@@ -974,22 +974,22 @@ Key1.A.CONSUMPTION.reg10 %>%
 Key1.A.TD.glb %>%
   DELTA_L_ALL(2100) %>%
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>%
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild"))) ->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower"))) ->
   delta.TD.glb
 
 Key1.A.TD.reg32 %>%
   DELTA_L_ALL(2100) %>%
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>%
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")))->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")))->
   delta.TD.reg32
 
 Key1.A.TD.reg10 %>%
   DELTA_L_ALL(2100) %>%
   filter(delta %in% c("gepic_HS2_HadGEM", "gepic_HS1_GFDL"))  %>%
-  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Severe", "Mild"),
-         delta = factor(delta, levels = c("Severe", "Mild")))->
+  mutate(delta = ifelse(delta == "gepic_HS2_HadGEM", "Higher", "Lower"),
+         delta = factor(delta, levels = c("Higher", "Lower")))->
   delta.TD.reg10
 
 
@@ -1007,15 +1007,15 @@ delta.TRADE.reg10 %>%
   bind_rows(change.pct.FPI.reg10)->
   delta.reg10
 
-delta.TD.reg10 %>% filter(sector == "Key", delta == "Severe") %>% arrange(-value) -> check
+delta.TD.reg10 %>% filter(sector == "Key", delta == "Higher") %>% arrange(-value) -> check
 unique(check$region)
 TD_REG_KEY <- c("Southeast Asia", "China+", "Africa" , "Middle East", "South Asia" ,
-                "Latin America","Europe" , "Pacific OECD", "North America", "Reforming Economy" )
+                "Latin America","Europe" , "Pacific OECD", "North America", "Reforming Economies" )
 
 change.pct.FPI.reg10  %>% arrange(-value) -> check
 unique(check$region)
 FPI_REG_KEY <- c("Southeast Asia" , "Africa", "Middle East", "China+" , "Latin America",
-                 "Pacific OECD", "South Asia",  "North America","Europe","Reforming Economy")
+                 "Pacific OECD", "South Asia",  "North America","Europe","Reforming Economies")
  
 
 # FPI_REG_KEY <- c("Southeast\nAsia", "Africa", "Middle\nEast", "China+", "Latin\nAmerica",
