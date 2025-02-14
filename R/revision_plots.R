@@ -100,10 +100,10 @@ wage.plot %>%
   geom_line(aes(x = year, y = index, color = exp, linetype = GGCM)) +
   facet_grid(GCM~ region) +
   labs(x = "", y ="Agricultural wage relative to NoCC (NoCC = 1)", 
-       fill = "Ag wage relative to NoCC (NoCC = 1)",
+       fill = "Ag wage relative to Reference (Reference = 1)",
        color = "Experiment", linetype = "GGCM",
        title = "High labor-response function") +
-  theme_bw() + theme0 + theme1 
+  theme_bw() + theme1 +
   theme(legend.position = "none") ->
   Wage_high_index
 
@@ -118,13 +118,14 @@ wage.plot %>%
   geom_hline(aes(yintercept = 1))+
   geom_line(aes(x = year, y = index, color = exp, linetype = GGCM)) +
   facet_grid(GCM~ region) +
-  labs(x = "", y ="Agricultural wage relative to NoCC (NoCC = 1)", 
-       fill = "Ag wage relative to NoCC (NoCC = 1)",
+  labs(x = "", y ="Agricultural wage relative to Reference (Reference = 1)", 
+       fill = "Ag wage relative to NoCC (Reference = 1)",
        color = "Experiment", linetype = "GGCM",
        title = "High labor-response function") +
-  theme_bw() + theme0 + theme1 +
+  theme_bw()  + theme1 +
 theme(legend.position = "bottom") ->
   Wage_low_index
+
 
 (Wage_high_index + ggtitle("(A) High labor-response function"))/
   (Wage_low_index + ggtitle("(B) Low labor-response function")) -> p
